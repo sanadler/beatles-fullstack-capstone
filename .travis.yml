@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: Hzix/B8ouDsgAwAymuXD9P20NqnblOGhckBX7rUlFUZ9chaxmh2sUs/HBFceJg5PpREC/aUKgrDq1cIGxYY/zKg1TlqklJG0cUNamRaiBPLjhB1++iSdlTr/egLbg25yPe+VfNqL9TUCbhsWg5nIsePljFOaz6KT1F1gsXDw/ToPGq65Nc215JV+D2VP/v/m6wRTrBvYfZe/13zOCE68cMAwtlB+2tz872Oz2kIZ6eAr8jubWHVJ3BgCMs4XKveGGBbwWylqSMFI+3+Jgt6gzcKeC+QVoGbkVwvLFOJ3TPcI2ZL9tDAMsnMDaOk8cR27aVjAAdUdhm+78xk1dKDnloba6ZaEIrRyZvwUaYeLlfIqUmQqcDIc+23r6X1qEqpXt2e8Virpn3rkJPoHKsboPa6BaU/ho5KYfSH/bfS9JMToT6k3CTpn6tGJHoSqioejZO3NX8bfhF4fxbTI8SQySehpU5uHaiD9VuNcZVHw1Ai04h80dSQnrU/aoLl+He8rPzcRzZOF6yN0gbCulzaE4opWYkYCtPiWSX5H9LhQ8DZsRsxXJQmjpBF/ReZDclBzEgPMYvAUi1B/eDCaSbC7PIX+JBXwTWNgeeuXCmGeF3i+7BSLZxyvHNUPf5bJzUkPFADPmYU9TNhehG+KP3aJ26v/abHGzVMa+bOYeheIVbE=
+  app: secret-lowlands-51033
+  on:
+    repo: sanadler/beatles-fullstack-capstone
