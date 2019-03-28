@@ -4,12 +4,22 @@ const app = express();
 app.use(express.static('public'));
 
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/views/index.html");
+    res.sendFile(__dirname + "/public/index.html");
   });
+
+app.get("/add-song", (req, res) => {
+    res.sendFile(__dirname + "/public/add-song.html");
+});
+
+app.get("/song-deleted", (req, res) => {
+    res.sendFile(__dirname + "/public/song-deleted.html");
+});
 
 app.use(morgan("common"));
 
 let server;
+
+
 
 function runServer() {
     const port = process.env.PORT || 8080;

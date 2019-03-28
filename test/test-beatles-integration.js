@@ -22,7 +22,7 @@ describe("Beatles Log", function() {
       return closeServer();
     });
   
-    it("should return 200 status code and be html", function() {
+    it("homepage should return 200 status code and be html", function() {
       return chai
         .request(app)
         .get("/")
@@ -31,4 +31,24 @@ describe("Beatles Log", function() {
           expect(res).to.be.html;
         });
     });
+
+    it("add pages hould return 200 status code and be html", function() {
+        return chai
+          .request(app)
+          .get("/add-song")
+          .then(function(res) {
+            expect(res).to.have.status(200);
+            expect(res).to.be.html;
+          });
+      });
+
+      it("deleted page should return 200 status code and be html", function() {
+        return chai
+          .request(app)
+          .get("/song-deleted")
+          .then(function(res) {
+            expect(res).to.have.status(200);
+            expect(res).to.be.html;
+          });
+      });
   });
