@@ -35,6 +35,7 @@ function getSongs(callbackFn) {
     setTimeout(function(){ callbackFn(MOCK_SONG_LIST)}, 100);
 }
 
+
 function displaySongs(data) {
     for (index in data.songs) {
        $('body').append(
