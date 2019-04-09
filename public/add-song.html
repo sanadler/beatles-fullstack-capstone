@@ -2,11 +2,36 @@
 <html>
 <head>
 <title>Add Song</title>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<link href="/app.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-<p>Hello World - song added</p>
-
+    <p>Hello World - add song</p>
+    <div class = page>
+            <form>
+                <label> Enter Your Song <br>
+                    <!--  <legend>Contact info</legend>--> 
+                    <label>Song Title
+                        <input placeholder="Hey Jude" type="text" name="song-name" id="song-name" />
+                    </label>
+                    <label>Album
+                            <input placeholder="Yellow Submarine" type="text" name="album-name" id="album-name" />
+                    </label>
+                    <label> Year
+                        <input id="song-year" name="song-year" type="number" min="1950" max="1980" required/><br>
+                    </label>
+                    <label>Writer(s) <br>
+                        <input type="checkbox" name="writer" value="John Lennon"> John Lennon<br>
+                        <input type="checkbox" name="writer" value="George Harrison"> George Harrison<br>
+                        <input type="checkbox" name="writer" value="Paul McCartney"> Paul McCartney<br>
+                        <input type="checkbox" name="writer" value="Ringo Starr"> Ringo Starr<br>
+                    </label>
+                    <button name="submit" type="submit">Submit</button>
+                </label>
+            </form>
+    </div>
+  <script type="text/javascript" src="/app.js"></script>
 </body>
 
 </html>
