@@ -123,7 +123,7 @@ describe('Song API resource', function() {
           expect(resSong.name).to.equal(song.name);
           expect(resSong.album).to.equal(song.album);
           expect(resSong.year).to.equal(song.year);
-         // expect(resSong.writers).to.equal(song.writers);
+          expect(resSong.writers).to.deep.equal(song.writers);
         });
     });
   });

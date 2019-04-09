@@ -20,8 +20,8 @@ app.get("/add-song", (req, res) => {
     res.sendFile(__dirname + "/public/add-song.html");
 });
 
-app.get("/song-deleted", (req, res) => {
-    res.sendFile(__dirname + "/public/song-deleted.html");
+app.get("/update-song", (req, res) => {
+    res.sendFile(__dirname + "/public/update-song.html");
 });
 
 app.use(morgan("common"));
