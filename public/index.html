@@ -7,15 +7,25 @@
         <title>The Beatles Log</title>
         <meta name="description" content="Log of beatles songs that you can add, update, and delete.">
         <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <link rel="icon" href="Logo-Beatles.jpg" type="image/x-icon"/>
         <link href="/app.css" rel="stylesheet" type="text/css" />
     </head>
 
     <body>
-        <header role="banenr">
-            <h1>The Beatles Log</h1>
+        <header role="banner">
+            <a href="index.html" title="go to homepage"><img class="logo" alt="beatles logo" src="/Logo-Beatles.jpg"></a>
+            <h1>Song Log</h1>
         </header>
         <main role="main">
-            <section></section>
+            <div class="container"> 
+                <div class="row songs-page">
+                    <div class="col-12">
+                        <button type="submit" name="add-song">Add Song</button>
+                    </div>      
+                </div>
+                <div class="row update-page"></div>  
+                <div class="row add-page"></div>
+            </div> 
         </main>
         <script type="text/javascript" src="/app.js"></script>
     </body>

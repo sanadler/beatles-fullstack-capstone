@@ -16,14 +16,6 @@ app.get("/", (req, res) => {
     res.sendFile(__dirname + "/public/index.html");
 });
 
-app.get("/add-song", (req, res) => {
-    res.sendFile(__dirname + "/public/add-song.html");
-});
-
-app.get("/update-song", (req, res) => {
-    res.sendFile(__dirname + "/public/update-song.html");
-});
-
 app.use(morgan("common"));
 
 app.get('/songs', (req, res) => {

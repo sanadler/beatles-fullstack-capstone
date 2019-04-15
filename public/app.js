@@ -77,6 +77,14 @@ function deleteSong(id){
         .catch(error => alert(error))
 }
 
+function getLyrics(name) {
+    fetch(`https://api.lyrics.ovh/v1/the beatles/${name}`)
+      .then(response => response.json())
+      .then(responseJson => 
+        displaySongLyrics(responseJson, name))
+      .catch(error => alert(error));
+  }
+
 function handleErrors(response) {
     if (!response.ok) {
       throw Error(response.status);
@@ -87,54 +95,57 @@ function handleErrors(response) {
 function displaySongs(data) {
    // console.log(data.songs[index].id);
     for (index in data.songs) {
-        $('section').append(
-        `<p> ${data.songs[index].name} </p>`);
-        $('section').append(
-            `<p> ${data.songs[index].year} </p>`);
-        $('section').append(
-            `<p> ${data.songs[index].album} </p>`);
-        for (i=0; i<data.songs[index].writers.length; i++){
-            $('section').append(
-                `<p> ${data.songs[index].writers[i]} </p>`);
-        }
-
-        $('section').append(
-            `<button type="submit" value="${data.songs[index].id}" name="update">Update</button><button type="submit" value="${data.songs[index].id}" name="delete">Delete</button>`);
-
+        $('.songs-page').append(
+        `<div class="col-6">
+            <div class="box">
+                <h4> ${data.songs[index].name} </h4>
+                <p> ${data.songs[index].year} </p>
+                <p> ${data.songs[index].album} </p>
+                <p> ${data.songs[index].writers} </p>
+                <div class="buttons"><button type="submit" value="${data.songs[index].name}" name="view">View Lyrics</button><button type="submit" value="${data.songs[index].id}" name="update">Update</button><button type="submit" value="${data.songs[index].id}" name="delete">Delete</button></div>
+            </div>
+        </div>`);
     }
 }
 
 function displaySong(data) {
-    $('section').append(`
+    $('.update-page').append(`
         <form>
             <label> Update Your Song <br>
-                <!--  <legend>Contact info</legend>--> 
                 <label>Song Title
-                    <input value="${data.name}" type="text" name="song-name" id="song-name" />
+                    <input value="${data.name}" type="text" name="song-name" id="song-name" required/>
                 </label>
                 <label>Album
-                        <input value="${data.album}" type="text" name="album-name" id="album-name" />
+                        <input value="${data.album}" type="text" name="album-name" id="album-name" required/>
                 </label>
                 <label> Year
-                    <input value = "${data.year}"id="song-year" name="song-year" type="number"/><br>
+                    <input value = "${data.year}"id="song-year" name="song-year" type="number" required/><br>
                 </label>
                 <label>Writer(s) <br>
-                    <input type="checkbox" name="writer" value="John Lennon"> John Lennon<br>
-                    <input type="checkbox" name="writer" value="George Harrison"> George Harrison<br>
-                    <input type="checkbox" name="writer" value="Paul McCartney"> Paul McCartney<br>
-                    <input type="checkbox" name="writer" value="Ringo Starr"> Ringo Starr<br>
+                    <label><input type="checkbox" name="writer" value="John Lennon"> John Lennon</label><br>
+                    <label><input type="checkbox" name="writer" value="George Harrison"> George Harrison</label><br>
+                    <label><input type="checkbox" name="writer" value="Paul McCartney"> Paul McCartney</label><br>
+                    <label><input type="checkbox" name="writer" value="Ringo Starr"> Ringo Starr</label><br>
                 </label>
                 <button type="submit" name="submit">Submit</button>
             </label>
         </form>`)
  }
 
-function handleAddSong(){
-    $('.page').on('click','button[name="update"]', postSong);
-}
+ function displaySongLyrics(data, name) {
+    $('.songs-page').empty();
+    console.log(data.lyrics)
+    $('.songs-page').append(
+        `<div class="col-12">
+            <div class="box">
+                <h3> Lyrics to ${name} </h3>
+                <p> ${data.lyrics} </p>
+            </div>
+        </div>`);
+ }
 
 function handleDeleteSong(){
-    $('section').on('click','button[name="delete"]', function(){
+    $('.songs-page').on('click','button[name="delete"]', function(){
         const id = $(this).prop("value");
         deleteSong(id);
         location.reload();
@@ -143,27 +154,64 @@ function handleDeleteSong(){
 
 function handleUpdateSong(id){
     getSongById(id);
-    $('section').empty();
-    $('section').on('click','button[name="submit"]', function(){
+    $('.songs-page').empty();
+    $('.update-page').on('click','button[name="submit"]', function(){
         updateSong(id);
     });
 }
 
+function handleAddSong(){
+    $('.song-page').empty();
+    $('.add-page').append(`<form>
+    <label> Enter Your Song <br>
+        <label>Song Title
+            <input placeholder="Hey Jude" type="text" name="song-name" id="song-name" required/>
+        </label>
+        <label>Album
+                <input placeholder="Yellow Submarine" type="text" name="album-name" id="album-name" required/>
+        </label>
+        <label> Year
+            <input id="song-year" name="song-year" type="number" required/><br>
+        </label>
+        <label>Writer(s) <br>
+            <label><input type="checkbox" name="writer" value="John Lennon"> John Lennon</label><br>
+            <label><input type="checkbox" name="writer" value="George Harrison"> George Harrison</label><br>
+            <label><input type="checkbox" name="writer" value="Paul McCartney"> Paul McCartney</label><br>
+            <label><input type="checkbox" name="writer" value="Ringo Starr"> Ringo Starr</label><br>
+        </label>
+        <button name="submit" type="submit">Submit</button>
+    </label>
+</form>`)
+    $('.add-page').on('click','button[name="submit"]', postSong);
+}
+
+
+function handleAddButton(){
+    $('.container').on('click','button[name="add-song"]', function(){
+        $('.row').empty();
+        handleAddSong();
+    });   
+}
+
+function handleViewButton(){
+    $('.songs-page').on('click','button[name="view"]', function(){
+        const name = $(this).prop("value");
+        getLyrics(name);
+    });   
+}
+
 function handleUpdateButton(){
-    $('section').on('click','button[name="update"]', function(){
+    $('.songs-page').on('click','button[name="update"]', function(){
         const id = $(this).prop("value");
         handleUpdateSong(id);
 
-    });
-     
+    });   
 }
 
 $(function() {
     getSongs();
-    handleAddSong();
     handleDeleteSong();
     handleUpdateButton();
-   // postSong();
-   // updateSong();
-   // deleteSong();
+    handleAddButton();
+    handleViewButton();
 })
