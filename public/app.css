@@ -1,17 +1,26 @@
 * {
     box-sizing: border-box;
-    background-color: black;
+    font-family: 'Open Sans Condensed', sans-serif;
+  }
+
+  html{
+    background-image: url("background.jpg");
+    height: 100%;
     color: white;
   }
 
+  body{
+      height: 100%;
+  }
+
   .logo {
-    max-width: 20%;
+    width: 20%;
     margin-left: auto;
     margin-right: auto;
   }
 
-  .container, .row, header {
-    max-width: 1000px;
+  .container, .row, header, main {
+    max-width: 1200px;
     padding-left: 20px;
     padding-right: 20px;
     margin: 0 auto;
@@ -25,20 +34,31 @@
 
   .box {
     padding: 2%;
-    border: 1px solid white;
+    box-shadow: rgb(158, 158, 158) -1px 1px 20px 3px;
   }
 
-
-  .col-6 {
+  .col-6, .col-12 {
     width: 100%;
     margin-bottom: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     padding-left: 1.04166666%;
     padding-right: 1.04166666%;
   }
 
-header{
+  h3{
+    font-size: 40px;
+    margin: 0;
+  }
+
+ header {
     text-align: center;
+    background-color: black;
+  }
+  
+  main{
+      background-color: black;
+      min-height: 100%;
+      overflow: inherit;
   }
 
   button:hover {
@@ -47,11 +67,76 @@ header{
 
   button[name="add-song"] {
     margin: 2em;
+    border: none;
+    font-size: 14pt;
   }
 
-  .buttons{
-      display: flex;
-      justify-content: center;
+  button{
+    -moz-box-shadow: inset 0px 1px 0px 0px #45D6D6;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #45D6D6;
+    box-shadow: inset 0px 1px 0px 0px #45D6D6;
+    background-color: #2CBBBB;
+    border: 1px solid #27A0A0;
+    display: inline-block;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-size: 14px;
+    padding: 8px 18px;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .navigation {
+      text-align: left;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+  }
+
+  nav a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    float: left;
+  }
+
+  nav a:hover{
+    background-color: #45D6D6;
+  }
+
+  #search {
+    margin-top: -10px;
+    min-height: 70px;
+    padding-top: 0;
+    padding-bottom: 25px;
+  }
+
+  button[name="search"]{
+    border: 0;
+    box-shadow: none;
+    font-size: 17px;
+    line-height: 46px;
+    color: black;
+    background-color: white;
+    margin-top: 5px;
+    padding: 2px;
+  }
+
+  button[name="search"]:hover{
+    background-color: darkgrey;
+  }
+
+  #song-search {
+    display: inline-block;
+    padding-left: 10px;
+    border: 0;
+    box-shadow: none;
+    font-size: 17px;
+    line-height: 46px;
+    width: 90%;
   }
 
   @media only screen and (min-width: 640px) {
@@ -62,3 +147,54 @@ header{
         width: 100%;
       }
   }
+
+  .form-style{
+    font-family: 'Open Sans Condensed', arial, sans;
+    width: 500px;
+    padding: 30px;
+    background: #FFFFFF;
+    margin: 50px auto;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+    -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+    -webkit-box-shadow:  0px 0px 15px rgba(0, 0, 0, 0.22);
+  
+  }
+  .form-style h2{
+    background: #4D4D4D;
+    text-transform: uppercase;
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #797979;
+    font-size: 18px;
+    font-weight: 100;
+    padding: 20px;
+    margin: -30px -30px 30px -30px;
+  }
+  .form-style input[type="text"],
+  .form-style input[type="number"],
+  .form-style textarea,
+  .form-style select 
+  {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    outline: none;
+    display: block;
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    background: transparent;
+    margin-bottom: 10px;
+    font: 16px Arial, Helvetica, sans-serif;
+    height: 45px;
+  }
+  .form-style textarea{
+    resize: none;
+    overflow: hidden;
+  }
+
+  form{
+    color: #797979;
+  }
+
+

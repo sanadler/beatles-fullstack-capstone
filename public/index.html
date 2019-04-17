@@ -13,16 +13,22 @@
 
     <body>
         <header role="banner">
-            <a href="index.html" title="go to homepage"><img class="logo" alt="beatles logo" src="/Logo-Beatles.jpg"></a>
+            <nav class="navigation">
+                <a href="/">Homepage</a>
+                <a name="add-song">Add Song</a>
+            </nav>
+            <a href="/" title="go to homepage"><img class="logo" alt="beatles logo" src="/Logo-Beatles.jpg"></a>
             <h1>Song Log</h1>
+            <form id="search">
+                <label>
+                <input id="song-search" type="text" placeholder="Search a song"/>
+                <button type="submit" name="search">Submit</button>
+                </label>
+            </form>
         </header>
         <main role="main">
             <div class="container"> 
-                <div class="row songs-page">
-                    <div class="col-12">
-                        <button type="submit" name="add-song">Add Song</button>
-                    </div>      
-                </div>
+                <div class="row songs-page"></div>
                 <div class="row update-page"></div>  
                 <div class="row add-page"></div>
             </div> 
