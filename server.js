@@ -44,7 +44,7 @@ app.get('/songs/:id', (req, res) => {
 });
 
 app.post('/songs', (req, res) => {
-  const requiredFields = ['name', 'album', 'year'];
+  const requiredFields = ['name', 'album', 'year', 'writers'];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -63,7 +63,6 @@ app.post('/songs', (req, res) => {
     })
     .then(song => res.status(201).json(song.serialize()))
     .catch(err => {
-      console.error(err);
       res.status(500).json({ error: 'Something went wrong' });
     });
 
@@ -86,7 +85,7 @@ app.put('/songs/:id', (req, res) => {
 
   Song
     .findByIdAndUpdate(req.params.id, { $set: updated }, { new: true })
-    .then(updatedSong => res.status(204).end())
+    .then(res.status(204).end())
     .catch(err => res.status(500).json({ message: 'Something went wrong' }));
 });
 

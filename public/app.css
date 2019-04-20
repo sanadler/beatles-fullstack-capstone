@@ -86,6 +86,10 @@
     text-transform: uppercase;
   }
 
+  button[name="submit"]{
+    margin-top: 20px;
+  }
+
   .navigation {
       text-align: left;
       list-style-type: none;
@@ -162,17 +166,14 @@
   .form-style h2{
     background: #4D4D4D;
     text-transform: uppercase;
-    font-family: 'Open Sans Condensed', sans-serif;
     color: #797979;
     font-size: 18px;
-    font-weight: 100;
+    font-weight: 200;
     padding: 20px;
     margin: -30px -30px 30px -30px;
   }
   .form-style input[type="text"],
-  .form-style input[type="number"],
-  .form-style textarea,
-  .form-style select 
+  .form-style input[type="number"]
   {
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -187,10 +188,6 @@
     margin-bottom: 10px;
     font: 16px Arial, Helvetica, sans-serif;
     height: 45px;
-  }
-  .form-style textarea{
-    resize: none;
-    overflow: hidden;
   }
 
   form{

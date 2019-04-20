@@ -35,8 +35,6 @@ function postSong(){
         })
     })
         .then(handleErrors)
-    //    .then(response => response.json())
-   //     .then(responseJson => displaySongs(responseJson))
         .catch(error => alert(error))
 }
 
@@ -87,7 +85,7 @@ function getLyrics(name) {
 
 function handleErrors(response) {
     if (!response.ok) {
-      throw Error(response.status);
+      throw Error(response.message);
     }
     return response;
 }
@@ -195,7 +193,7 @@ function handleAddButton(){
     $('.navigation').on('click','a[name="add-song"]', function(){
         $('.row').empty();
         handleAddSong();
-    });   
+    }); 
 }
 
 function handleViewButton(){
@@ -215,10 +213,9 @@ function handleUpdateButton(){
 
 function watchSearch() {
     $('#search').submit(event => {
-      let song = $('#song-search').val();
+      let name = $('#song-search').val();
       event.preventDefault();
-      let songs = getSongs();
-      getSpecificPokemon(pokemon);
+      getSongByName(name);
        $('#song-search, textarea').val('');
     });
   }
