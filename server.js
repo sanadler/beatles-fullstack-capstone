@@ -43,6 +43,21 @@ app.get('/songs/:id', (req, res) => {
     });
 });
 
+app.get('/songs/name/:name', (req, res) => {
+  Song
+    .find({ "name": req.params.name })
+    .then(songs => {
+      res.json({
+        songs: songs.map(
+          (song) => song.serialize())
+      });
+    })
+    .catch(err => {
+    //  console.error(err);
+      res.status(500).json({ error: 'something went horribly awry' });
+    });
+});
+
 app.post('/songs', (req, res) => {
   const requiredFields = ['name', 'album', 'year', 'writers'];
   for (let i = 0; i < requiredFields.length; i++) {

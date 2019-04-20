@@ -10,7 +10,15 @@ function getSongById(id) {
     fetch(`/songs/${id}`)
         .then(handleErrors)
         .then(response => response.json())
-        .then(responseJson => displaySong(responseJson))
+        .then(responseJson => displaySongById(responseJson))
+        .catch(error => alert(error))
+}
+
+function getSongByName(name) {
+    fetch(`/songs/name/${name}`)
+        .then(handleErrors)
+        .then(response => response.json())
+        .then(responseJson => displaySongs(responseJson))
         .catch(error => alert(error))
 }
 
@@ -40,7 +48,6 @@ function postSong(){
 
 function updateSong(updateId){
     const songName = $(`input[name='song-name']`).val();
-    console.log(songName);
     const albumName = $(`input[name='album-name']`).val();
     const songYear = $(`input[name='song-year']`).val();
     const songWriters = [];
@@ -83,6 +90,18 @@ function getLyrics(name) {
       .catch(error => alert("Can't find lyrics to this song"));
   }
 
+function format(str) {
+    return str
+        .replace(/[\\]/g, '\\\\')
+        .replace(/[\"]/g, '\\\"')
+        .replace(/[\/]/g, '\\/')
+        .replace(/[\b]/g, '\\b')
+        .replace(/[\f]/g, '\\f')
+        .replace(/[\n]/g, '\\n')
+        .replace(/[\r]/g, '\\r')
+        .replace(/[\t]/g, '\\t');
+};
+
 function handleErrors(response) {
     if (!response.ok) {
       throw Error(response.message);
@@ -91,7 +110,7 @@ function handleErrors(response) {
 }
 
 function displaySongs(data) {
-    console.log(data.songs.length);
+    $('.songs-page').empty();
     $('.songs-page').append(`<div class="col-12"><div class="song-number">Songs</div>
         <div class="number"><h3>${data.songs.length}</h3></div></div>`);
     for (index in data.songs) {
@@ -108,7 +127,7 @@ function displaySongs(data) {
     }
 }
 
-function displaySong(data) {
+function displaySongById(data) {
     $('.update-page').append(`
         <div class="form-style">
             <form>
@@ -134,13 +153,14 @@ function displaySong(data) {
  }
 
  function displaySongLyrics(data, name) {
+    const lyrics = format(data.lyrics);
+    lyrics.replace(/\\n/g, '<br />');
     $('.songs-page').empty();
-    console.log(data.lyrics)
     $('.songs-page').append(
         `<div class="col-12">
             <div class="box">
                 <h3> Lyrics to ${name} </h3>
-                <p> ${data.lyrics} </p>
+                <p> ${lyrics} </p>
             </div>
         </div>`);
  }
@@ -166,7 +186,7 @@ function handleAddSong(){
     $('.add-page').append(`
         <div class="form-style">
             <form>
-                <h2> Update Your Song </h2>
+                <h2> Add Your Song </h2>
                     <label>Song Title
                         <input placeholder="Hey Jude" type="text" name="song-name" id="song-name" required/>
                     </label>
@@ -199,7 +219,7 @@ function handleAddButton(){
 function handleViewButton(){
     $('.songs-page').on('click','button[name="view"]', function(){
         const name = $(this).prop("value");
-        getLyrics(name);
+        getLyrics(name, format);
     });   
 }
 
