@@ -154,13 +154,13 @@ function displaySongById(data) {
 
  function displaySongLyrics(data, name) {
     const lyrics = format(data.lyrics);
-    lyrics.replace(/\\n/g, '<br />');
+    let replaced = lyrics.replace(/\\n/g, '<br />');
     $('.songs-page').empty();
     $('.songs-page').append(
         `<div class="col-12">
             <div class="box">
                 <h3> Lyrics to ${name} </h3>
-                <p> ${lyrics} </p>
+                <p> ${replaced} </p>
             </div>
         </div>`);
  }
