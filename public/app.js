@@ -1,3 +1,4 @@
+//get songs from database
 function getSongs() {
     fetch('/songs')
         .then(handleErrors)
@@ -6,6 +7,7 @@ function getSongs() {
         .catch(error => alert(error))
 }
 
+//get song by id from database
 function getSongById(id) {
     fetch(`/songs/${id}`)
         .then(handleErrors)
@@ -14,6 +16,7 @@ function getSongById(id) {
         .catch(error => alert(error))
 }
 
+//get song by name from dataase
 function getSongByName(name) {
     fetch(`/songs/name/${name}`)
         .then(handleErrors)
@@ -22,12 +25,13 @@ function getSongByName(name) {
         .catch(error => alert(error))
 }
 
+//post song to database
 function postSong(){
     const songName = $(`input[name='song-name']`).val();
     const albumName = $(`input[name='album-name']`).val();
     const songYear = $(`input[name='song-year']`).val();
     const songWriters = [];
-    $("input:checkbox[name='writer']:checked").each(function(){
+    $('input:checkbox[name="writer"]:checked').each(function(){
         songWriters.push($(this).val());
     });
     fetch('/songs' ,{
@@ -46,12 +50,13 @@ function postSong(){
         .catch(error => alert(error))
 }
 
+//update song in database
 function updateSong(updateId){
     const songName = $(`input[name='song-name']`).val();
     const albumName = $(`input[name='album-name']`).val();
     const songYear = $(`input[name='song-year']`).val();
     const songWriters = [];
-    $("input:checkbox[name='writer']:checked").each(function(){
+    $('input:checkbox[name="writer"]:checked').each(function(){
         songWriters.push($(this).val());
     });
     fetch(`/songs/${updateId}`,{
@@ -71,6 +76,7 @@ function updateSong(updateId){
         .catch(error => alert(error))
 }
 
+//delete song in  database
 function deleteSong(id){
     fetch(`/songs/${id}`,{
         method: 'delete',
@@ -82,6 +88,7 @@ function deleteSong(id){
         .catch(error => alert(error))
 }
 
+//get lyrics of a certain song  ..  api takes a bit to load
 function getLyrics(name) {
     fetch(`https://api.lyrics.ovh/v1/the beatles/${name}`)
       .then(response => response.json())
@@ -90,6 +97,7 @@ function getLyrics(name) {
       .catch(error => alert("Can't find lyrics to this song"));
   }
 
+//function to help format the lyrics
 function format(str) {
     return str
         .replace(/[\\]/g, '\\\\')
@@ -109,6 +117,7 @@ function handleErrors(response) {
     return response;
 }
 
+//display all the songs in the database  or if user searches a song
 function displaySongs(data) {
     $('.songs-page').empty();
     $('.songs-page').append(`<div class="col-12"><div class="song-number">Songs</div>
@@ -127,6 +136,7 @@ function displaySongs(data) {
     }
 }
 
+//display one song by id for update song
 function displaySongById(data) {
     $('.update-page').append(`
         <div class="form-style">
@@ -152,6 +162,7 @@ function displaySongById(data) {
         </div>`)
  }
 
+ //display lyrics of one song
  function displaySongLyrics(data, name) {
     const lyrics = format(data.lyrics);
     let replaced = lyrics.replace(/\\n/g, '<br />');
@@ -165,6 +176,7 @@ function displaySongById(data) {
         </div>`);
  }
 
+ //handles delete songb utton and deletes the song from the database. reloads homepage
 function handleDeleteSong(){
     $('.songs-page').on('click','button[name="delete"]', function(){
         const id = $(this).prop("value");
@@ -173,6 +185,7 @@ function handleDeleteSong(){
     });
 }
 
+//handles the update song button and updates the songin the database
 function handleUpdateSong(id){
     getSongById(id);
     $('.songs-page').empty();
@@ -181,6 +194,7 @@ function handleUpdateSong(id){
     });
 }
 
+//displays the add song form and then posts the song to database
 function handleAddSong(){
     $('.songs-page').empty();
     $('.add-page').append(`
@@ -208,7 +222,7 @@ function handleAddSong(){
     $('.add-page form').on('submit', postSong);
 }
 
-
+//handles the add song button in the nav
 function handleAddButton(){
     $('.navigation').on('click','a[name="add-song"]', function(){
         $('.row').empty();
@@ -216,6 +230,7 @@ function handleAddButton(){
     }); 
 }
 
+//handles view button so you can see the lyrics for the song
 function handleViewButton(){
     $('.songs-page').on('click','button[name="view"]', function(){
         const name = $(this).prop("value");
@@ -223,6 +238,7 @@ function handleViewButton(){
     });   
 }
 
+//handles the update button, sends you to the update form and then updates the song
 function handleUpdateButton(){
     $('.songs-page').on('click','button[name="update"]', function(){
         const id = $(this).prop("value");
@@ -231,6 +247,7 @@ function handleUpdateButton(){
     });   
 }
 
+//watches the search song input and gets the songs you are searching for
 function watchSearch() {
     $('#search').submit(event => {
       let name = $('#song-search').val();

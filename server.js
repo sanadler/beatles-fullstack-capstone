@@ -18,6 +18,7 @@ app.get("/", (req, res) => {
 
 app.use(morgan("common"));
 
+//get endpoint, gets all the songs in the database
 app.get('/songs', (req, res) => {
   Song
     .find()
@@ -28,21 +29,21 @@ app.get('/songs', (req, res) => {
       });
     })
     .catch(err => {
-      console.error(err);
       res.status(500).json({ message: 'Internal server error' });
     });
 });
 
+//get by id endpoint
 app.get('/songs/:id', (req, res) => {
   Song
     .findById(req.params.id)
     .then(song => res.json(song.serialize()))
     .catch(err => {
-      console.error(err);
-      res.status(500).json({ error: 'something went horribly awry' });
+      res.status(500).json({ error: 'Something went wrong' });
     });
 });
 
+//get by name endpoint
 app.get('/songs/name/:name', (req, res) => {
   Song
     .find({ "name": req.params.name })
@@ -53,22 +54,25 @@ app.get('/songs/name/:name', (req, res) => {
       });
     })
     .catch(err => {
-    //  console.error(err);
-      res.status(500).json({ error: 'something went horribly awry' });
+      res.status(500).json({ error: 'Something went wrong' });
     });
 });
 
+//post endpoint .. extra check for writers since its an array
 app.post('/songs', (req, res) => {
   const requiredFields = ['name', 'album', 'year', 'writers'];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
       const message = `Missing \`${field}\` in request body`;
-      console.error(message);
+      return res.status(400).send(message);
+    }
+    if (req.body.writers.length == 0 || req.body.writers.length == null){
+      const message = `Missing \`${field}\` in request body`;
       return res.status(400).send(message);
     }
   }
-
+//create the song in the database and post
   Song
     .create({
       name: req.body.name,
@@ -83,11 +87,16 @@ app.post('/songs', (req, res) => {
 
 });
 
+//update song endpoint
 app.put('/songs/:id', (req, res) => {
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     res.status(400).json({
       error: 'Request path id and request body id values must match'
     });
+  }
+  if (req.body.writers.length == 0 || req.body.writers.length == null){
+    const message = `Missing \`${field}\` in request body`;
+    return res.status(400).send(message);
   }
 
   const updated = {};
@@ -97,18 +106,18 @@ app.put('/songs/:id', (req, res) => {
       updated[field] = req.body[field];
     }
   });
-
+//find song by id and update the fields
   Song
     .findByIdAndUpdate(req.params.id, { $set: updated }, { new: true })
     .then(res.status(204).end())
     .catch(err => res.status(500).json({ message: 'Something went wrong' }));
 });
 
+//delete song endpoint
 app.delete('/songs/:id', (req, res) => {
   Song
     .findByIdAndRemove(req.params.id)
     .then(() => {
-      console.log(`Deleted blog post with id \`${req.params.id}\``);
       res.status(204).end();
     });
 });
