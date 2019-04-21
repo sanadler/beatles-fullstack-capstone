@@ -205,7 +205,7 @@ function handleAddSong(){
                     <button type="submit" name="submit">Submit</button>
             </form>
         </div>`)
-    $('.add-page').on('click','button[name="submit"]', postSong);
+    $('.add-page form').on('submit', postSong);
 }
 
 
