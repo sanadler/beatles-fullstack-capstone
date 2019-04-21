@@ -94,10 +94,6 @@ app.put('/songs/:id', (req, res) => {
       error: 'Request path id and request body id values must match'
     });
   }
-  // if (req.body.writers.length == 0 || req.body.writers.length == null){
-  //   const message = `Missing \`${field}\` in request body`;
-  //   return res.status(400).send(message);
-  // }
 
   const updated = {};
   const updateableFields = ['name', 'album', 'year', 'writers'];
