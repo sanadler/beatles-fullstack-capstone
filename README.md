@@ -36,7 +36,6 @@ HTML, CSS, JavaScript, jQuery, Node.js, mongodb
 ### Demo
 
 <a href="https://secret-lowlands-51033.herokuapp.com/">Live Demo</a>
-<a href="https://github.com/sanadler/beatles-fullstack-capstone/">Github</a>
 ### Author
 
 Sarah Nadler
